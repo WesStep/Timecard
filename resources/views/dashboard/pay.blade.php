@@ -39,9 +39,6 @@
         </div>
         @isset($shifts)
             <div class="row">
-                <div class="col-md-1">
-                    <p class="text-danger"><strong>Delete</strong></p>
-                </div>
                 <div class="col-md">
                     <p><strong>Company</strong></p>
                 </div>
@@ -56,6 +53,9 @@
                 </div>
                 <div class="col-md">
                     <p><strong>Amount to Pay</strong></p>
+                </div>
+                <div class="col-md-1">
+                    <p class="text-danger"><strong>Delete</strong></p>
                 </div>
             </div>
             <hr>
@@ -77,7 +77,7 @@
                         <p>${{ $shift[4] }}</p>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                        <button type="button" class="btn btn-sm btn-danger"><strong>X</strong></button>
                     </div>
                 </div>
                 <hr>
