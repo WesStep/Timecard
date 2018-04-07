@@ -91,23 +91,6 @@
                 <div class="col-md-1"></div>
             </div>
             <div class="row">
-                <form action="{{ route('dashboard/pay') }}" method="post">
-                    <div class="col">
-                        <div class="form-group row">
-                            <label for="hoursSinceLastPay" class="col-sm-4 col-form-label text-md-right">Unpaid Hours Worked:</label>
-                            <div class="col-md-6">
-                                <input class="form-control" type="number" name="hoursSinceLastPay" value="{{ 20 }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group row">
-                            <label for="estimatedPay" class="col-md-4 col-form-label text-md-right">Estimated Pay:</label>
-                            <div class="col-md-6">
-                                <input class="form-control" type="number" name="estimatedPay" value="{{ 200 }}">
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <div class="col-md-6 offset-md-4">
                             <div class="checkbox">
