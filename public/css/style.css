@@ -1,0 +1,268 @@
+/*---------------------- Sections ---------------------*/
+/*----- 1) Resetting and Typesetting ------------------*/
+/*----- 2) Main Layout and Design of Elements ---------*/
+/*----- 3) Typography ---------------------------------*/
+/*----- 4) Media and Print Queries --------------------*/
+
+
+/*---------- Start -----------------------------*/
+/*- 1 ------ Resetting and Typsetting ----------*/
+/*----------------------------------------------*/
+
+/* NA */
+
+/*---------- End -------------------------------*/
+/*- 1 ------ Resetting and Typsetting ----------*/
+/*----------------------------------------------*/
+
+
+
+
+
+/*---------- Start ---------------------------------------*/
+/*- 2 ------ Main Layout and Design of Elements ----------*/
+/*--------------------------------------------------------*/
+
+
+/*----- Start ---------------*/
+/*- 2 - Header Elements -----*/
+/*---------------------------*/
+
+header {
+
+}
+
+/*----- End -----------------*/
+/*- 2 - Header Elements -----*/
+/*---------------------------*/
+
+
+/*----- Start -------------*/
+/*- 2 - Body Elements -----*/
+/*-------------------------*/
+
+body {
+    overflow-x: hidden;
+}
+
+.btn {
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.margin-bottom {
+    margin-bottom: 2rem;
+}
+
+.no-margin {
+    margin: 0 !important; 
+}
+
+.page {
+
+}
+
+/* Customize the label (the container) */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  width: 30px;
+  border-radius: 0.25rem;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #007bff;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 11px;
+  top: 5px;
+  width: 8px;
+  height: 15px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/*----- End ---------------*/
+/*- 2 - Body Elements -----*/
+/*-------------------------*/
+
+
+/*----- Start ---------------*/
+/*- 2 - Footer Elements -----*/
+/*---------------------------*/
+
+footer {
+
+}
+
+/*----- End -----------------*/
+/*- 2 - Footer Elements -----*/
+/*---------------------------*/
+
+
+/*---------- End -----------------------------------------*/
+/*- 2 ------ Main Layout and Design of Elements ----------*/
+/*--------------------------------------------------------*/
+
+
+
+
+
+/*---------- Start ---------------*/
+/*- 3 ------ Typography ----------*/
+/*--------------------------------*/
+
+
+/*----- Start ---------------*/
+/*- 3 - Header Elements -----*/
+/*---------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/*----- End -----------------*/
+/*- 3 - Header Elements -----*/
+/*---------------------------*/
+
+
+/*----- Start ------------------*/
+/*- 3 - Paragraph Elements -----*/
+/*------------------------------*/
+
+p {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/*----- End --------------------*/
+/*- 3 - Paragraph Elements -----*/
+/*------------------------------*/
+
+
+/*----- Start -------------*/
+/*- 3 - Link Elements -----*/
+/*-------------------------*/
+
+a {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/*----- End ---------------*/
+/*- 3 - Link Elements -----*/
+/*-------------------------*/
+
+
+/*----- Start --------------*/
+/*- 3 - Other ELements -----*/
+/*--------------------------*/
+
+input, button, label, textarea {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/*----- End ----------------*/
+/*- 3 - Other ELements -----*/
+/*--------------------------*/
+
+
+/*---------- End -----------------*/
+/*- 3 ------ Typography ----------*/
+/*--------------------------------*/
+
+
+
+
+
+/*---------- Start ----------------------------*/
+/*- 4 ------ Media and Print Queries ----------*/
+/*---------------------------------------------*/
+
+
+/*----- Start ---------------*/
+/*- 4 - Tablet Stylings -----*/
+/*---------------------------*/
+
+@media only screen and (min-width: px) and (max-width: px) {
+
+}
+
+/*----- End -----------------*/
+/*- 4 - Tablet Stylings -----*/
+/*---------------------------*/
+
+
+/*----- Start ----------------*/
+/*- 4 - Desktop Stylings -----*/
+/*----------------------------*/
+
+@media only screen and (min-width: px) {
+
+}
+
+/*----- End ------------------*/
+/*- 4 - Desktop Stylings -----*/
+/*----------------------------*/
+
+
+/*----- Start --------------*/
+/*- 4 - Print Stylings -----*/
+/*--------------------------*/
+
+@media print {
+
+}
+
+/*----- End ----------------*/
+/*- 4 - Print Stylings -----*/
+/*--------------------------*/
+
+
+/*---------- End ------------------------------*/
+/*- 4 ------ Media and Print Queries ----------*/
+/*---------------------------------------------*/
