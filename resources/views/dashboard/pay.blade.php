@@ -91,7 +91,8 @@
                 <div class="col-md-1"></div>
             </div>
             <div class="row">
-                    <div class="form-group row">
+                <form action="#" method="post">
+                    <div class="form-group">
                         <div class="col-md-6 offset-md-4">
                             <div class="checkbox">
                                 <label class="checkbox-container no-margin">
@@ -102,7 +103,7 @@
                         </div>
                     </div>
                     {{ csrf_field() }}
-                    <div class="form-group row mb-0">
+                    <div class="form-group">
                         <div class="col-md-8 offset-md-4">
                             <button type="submit" name="pay" class="btn btn-lg btn-primary no-margin">Record Payment</button>
                         </div>
