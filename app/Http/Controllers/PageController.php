@@ -38,7 +38,7 @@ class PageController extends Controller
 
         // Get the shifts for the month according to the user
         $daysInMonth = $firstOfTheMonth->daysInMonth - 1;
-        $monthShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company')
+        $monthShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company, has_been_paid')
             ->where('user_id', $user->id)
             ->wherebetween('created_at', array($monthDays[0][0], $monthDays[$daysInMonth][0]))
             ->orderBy('created_at')->get(); // To access clock in time: $monthDays[$i]['clock_in_time']
@@ -62,7 +62,7 @@ class PageController extends Controller
                     array_push($monthDays[$i][3], []);
                     $clock_in_time = new Carbon($shift['clock_in_time']);
                     $clock_out_time = new Carbon($shift['clock_out_time']);
-                    array_push($monthDays[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $shift['amount_to_pay'], $shift['company']);
+                    array_push($monthDays[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $shift['company'], $shift['amount_to_pay'], $shift['has_been_paid']);
                     $x ++;
                 }
             }
@@ -136,7 +136,7 @@ class PageController extends Controller
         } // For getting down to the week day number, use this: $lastWeek[$i][1]
 
         // Get the shifts for the last week according to the user
-        $lastWeekShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company')
+        $lastWeekShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company, has_been_paid')
             ->where('user_id', $user->id)
             ->wherebetween('created_at', array($lastWeek[6][0], $lastWeek[0][0]))
             ->orderBy('created_at', 'desc')->get(); // To access clock in time: $lastWeekShifts[$i]['clock_in_time']
@@ -160,7 +160,7 @@ class PageController extends Controller
                     array_push($lastWeek[$i][3], []);
                     $clock_in_time = new Carbon($shift['clock_in_time']);
                     $clock_out_time = new Carbon($shift['clock_out_time']);
-                    array_push($lastWeek[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $shift['amount_to_pay'], $shift['company']);
+                    array_push($lastWeek[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $shift['company'], $shift['amount_to_pay'], $shift['has_been_paid']);
                     $x ++;
                 }
             }

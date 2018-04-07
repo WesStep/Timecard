@@ -54,18 +54,30 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 text-md-right">
-                                        <p><strong>Estimated Pay:</strong></p>
+                                        <p><strong>Company:</strong></p>
                                     </div>
                                     <div class="col-md-9">
-                                        <p>${{ $shift[5] }}</p>
+                                        <p>{{ $shift[5] }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 text-md-right">
-                                        <p><strong>Company:</strong></p>
+                                        <p><strong>Estimated Pay:</strong></p>
                                     </div>
                                     <div class="col-md-9">
-                                        <p>{{ $shift[6] }}</p>
+                                        <p>${{ $shift[6] }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 text-md-right">
+                                        <p><strong>Paid?</strong></p>
+                                    </div>
+                                    <div class="col-md-9">
+                                        @if($shift[7] == true)
+                                            <p class="text-success"><strong>YES</strong></p>
+                                        @elseif($shift[7] == false)
+                                            <p class="text-danger"><strong>NO</strong></p>
+                                        @endif
                                     </div>
                                 </div>
                                 <br>

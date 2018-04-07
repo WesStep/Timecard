@@ -15,66 +15,68 @@
             </div>
             @endif
             @include('partials.errors')
-            <form action="{{ route('dashboard/pay/show') }}" method="get">
-                {{ csrf_field() }}
-                <div class="form-group row">
-                    <label for="employeeToPay" class="col col-form-label text-md-right">Employee:</label>
-                    <div class="col">
-                        <select id="employeeToPay" class="form-control" name="employeeToPay">
-                            <option value="n/a">n/a</option>
-                            @foreach($users as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
-                        </select>
+            <div class="col-md-12">
+                <form action="{{ route('dashboard/pay/show') }}" method="get">
+                    {{ csrf_field() }}
+                    <div class="form-group row">
+                        <label for="employeeToPay" class="col-md-2 col-form-label text-md-right">Employee:</label>
+                        <div class="col-md-4">
+                            <select id="employeeToPay" class="form-control" name="employeeToPay">
+                                <option value="n/a">n/a</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" name="lookupEmployee" class="btn btn-lg btn-primary no-margin">Employee Lookup</button>
+                        </div>
                     </div>
-                    <div class="col"></div>
-                    <div class="col">
-                        <button type="submit" name="lookupEmployee" class="btn btn-lg btn-primary no-margin">Employee Lookup</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
         @isset($shifts)
+        <hr>
         <div class="row">
             <div class="col-md">
-                <p><strong>Company</strong></p>
+                <p class="mb-0"><strong>Company</strong></p>
             </div>
             <div class="col-md">
-                <p><strong>Clock In</strong></p>
+                <p class="mb-0"><strong>Clock In</strong></p>
             </div>
             <div class="col-md">
-                <p><strong>Clock Out</strong></p>
+                <p class="mb-0"><strong>Clock Out</strong></p>
             </div>
             <div class="col-md">
-                <p><strong>Duration</strong></p>
+                <p class="mb-0"><strong>Duration</strong></p>
             </div>
             <div class="col-md">
-                <p><strong>Amount to Pay</strong></p>
+                <p class="mb-0"><strong>Amount to Pay</strong></p>
             </div>
             <div class="col-md-1">
-                <p class="text-danger"><strong>Delete</strong></p>
+                <p class="text-danger mb-0"><strong>Delete</strong></p>
             </div>
         </div>
         <hr>
         @foreach($shifts as $shift)
         <div class="row">
             <div class="col-md">
-                <p>{{ $shift[0] }}</p>
+                <p class="mb-0">{{ $shift[0] }}</p>
             </div>
             <div class="col-md">
-                <p>{{ $shift[1]->format('h:i A') }}</p>
+                <p class="mb-0">{{ $shift[1]->format('h:i A') . " on " . $shift[1]->format('l') . " the " . $shift[1]->format('jS') }}</p>
             </div>
             <div class="col-md">
-                <p>{{ $shift[2]->format('h:i A') }}</p>
+                <p class="mb-0">{{ $shift[2]->format('h:i A') . " on " . $shift[2]->format('l') . " the " . $shift[2]->format('jS') }}</p>
             </div>
             <div class="col-md">
-                <p>{{ floor(round($shift[3] / 60, 2)) }} hours, {{ $shift[3] % 60 }} minutes</p>
+                <p class="mb-0">{{ floor(round($shift[3] / 60, 2)) }} hours, {{ $shift[3] % 60 }} minutes</p>
             </div>
             <div class="col-md">
-                <p>${{ $shift[4] }}</p>
+                <p class="mb-0">${{ $shift[4] }}</p>
             </div>
             <div class="col-md-1">
-                <button type="button" class="btn btn-sm btn-danger"><strong>X</strong></button>
+                <button type="button" class="btn btn-sm btn-danger mb-0"><strong>X</strong></button>
             </div>
         </div>
         <hr>
@@ -93,16 +95,17 @@
             <div class="col-md"></div>
             <div class="col-md"></div>
             <div class="col-md">
-                <form action="#" method="post">
+                <form action="{{ route('dashboard/pay') }}" method="post">
                     <div class="form-group row">
                         <div class="col-md-8 offset-col-4 checkbox">
                             <label class="checkbox-container no-margin">
-                                <input type="checkbox" name="paid"> Paid?
+                                <input id="paid" type="checkbox" name="paid" required> Paid?
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                     </div>
                     {{ csrf_field() }}
+                    <input type="hidden" id="employee_id" name="employee_id" value="{{ $id }}">
                     <div class="form-group row">
                         <div class="col-md">
                             <button type="submit" name="pay" class="btn btn-lg btn-primary no-margin">Record</button>
