@@ -61,9 +61,6 @@
             <hr>
             @foreach($shifts as $shift)
                 <div class="row">
-                    <div class="col-md-1">
-                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                    </div>
                     <div class="col-md">
                         <p>{{ $shift[0] }}</p>
                     </div>
@@ -78,6 +75,9 @@
                     </div>
                     <div class="col-md">
                         <p>${{ $shift[4] }}</p>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-sm btn-danger">Delete</button>
                     </div>
                 </div>
                 <hr>
