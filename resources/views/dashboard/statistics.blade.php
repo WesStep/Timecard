@@ -8,17 +8,34 @@
 
 @section('content')
     <div class="container">
-        <hr></hr>
+        <div class="row">
+            <h1>For the Week of the {{ $weekAgo->format('jS') }} through the {{ $today->format('jS') }}</h1>
+        </div>
+        <div class="row">
+            <div class="col-md"></div>
+            @foreach($companies as $company)
+                <div class="col-md"><p><strong>{{ $company->name }}</strong></p></div>
+            @endforeach
+        </div>
+        <hr>
         @foreach($users as $user)
         <div class="row">
-            <div class="col-lg-5 text-lg-right">
-                <h3 class="mb-0">{{ $user->name }} ID: {{ $user->id }}</h3>
+            <div class="col-md text-md-right">
+                <p><strong>{{ $user->name }} ID: {{ $user->id }}</strong></p>
             </div>
-            <div class="col-lg-7 text-lg-left">
-                <p class="mb-0 mt-1"><strong>Hours worked last week:</strong> ### | <strong>Notes from past week's shifts:</strong> "..."</p>
-            </div>
+            @foreach($companies as $company)
+                <div class="col-md">
+                    <div class="row">
+                        <p>Hours worked:</p>
+                    </div>
+
+                    <div class="row">
+                        <p>Notes:</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
-        <hr></hr>
+        <hr>
         @endforeach
     </div>
 @endsection

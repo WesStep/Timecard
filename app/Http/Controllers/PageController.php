@@ -215,10 +215,23 @@ class PageController extends Controller
     public function getStats()
     {
         // Business stats page [business owner]
+
+        // Current day
+        $today = Carbon::now();
+        $weekAgo = Carbon::now()->subDays(7);
         // Get the employee role_id
         $role_id = DB::table('roles')->where('name', 'employee')->pluck('id');
         // Find employee's info for each employee account
         $employee = DB::table('users')->where('role_id', $role_id)->get();
-        return view('dashboard.statistics', ['role' => session('role'), 'users' => $employee]);
+        $companies = DB::table('companies')->where('is_deleted', false)->orderBy('name')->get();
+        return view('dashboard.statistics',
+            [
+                'role' => session('role'),
+                'users' => $employee,
+                'companies' => $companies,
+                'today' => $today,
+                'weekAgo' => $weekAgo
+            ]
+        );
     }
 }
