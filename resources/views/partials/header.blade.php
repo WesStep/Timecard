@@ -43,7 +43,7 @@
                     <a class="nav-link text-light" href="{{ route('dashboard/company') }}">Manage Companies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('dashboard/statistics') }}">Business Stats</a>
+                    <a class="nav-link text-light" href="{{ route('dashboard/statistics/week') }}">Business Stats</a>
                 </li>
                 @endif
             </ul>

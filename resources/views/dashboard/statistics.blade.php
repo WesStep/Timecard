@@ -9,6 +9,13 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="btn-group" role="group" aria-label="Time Periods">
+                <button type="button" class="btn btn-primary" onclick="{{ route('dashboard/statistics/week') }}">Last Week</button>
+                <button type="button" class="btn btn-primary" onclick="{{ route('dashboard/statistics/month') }}">Last Month</button>
+                <button type="button" class="btn btn-primary" onclick="{{ route('dashboard/statistics/year') }}">Last Year</button>
+            </div>
+        </div>
+        <div class="row">
             <h1>For the Week of the {{ $weekAgo->format('jS') }} through the {{ $today->format('jS') }}</h1>
         </div>
         <div class="row">
