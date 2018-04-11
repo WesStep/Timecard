@@ -10,13 +10,13 @@
     <div class="container">
         <div class="row">
             <div class="btn-group" role="group" aria-label="Time Periods">
-                <button type="button" class="btn btn-primary" onclick="{{ route('dashboard/statistics/week') }}">Last Week</button>
-                <button type="button" class="btn btn-primary" onclick="{{ route('dashboard/statistics/month') }}">Last Month</button>
-                <button type="button" class="btn btn-primary" onclick="{{ route('dashboard/statistics/year') }}">Last Year</button>
+                <button type="button" class="btn btn-info" onclick="{{ route('dashboard/statistics/week') }}">Last Week</button>
+                <button type="button" class="btn btn-info" onclick="{{ route('dashboard/statistics/month') }}">Last Month</button>
+                <button type="button" class="btn btn-info" onclick="{{ route('dashboard/statistics/year') }}">Last Year</button>
             </div>
         </div>
         <div class="row">
-            <h1>For the Week of the {{ $weekAgo->format('jS') }} through the {{ $today->format('jS') }}</h1>
+            <h1>Week of the {{ $weekAgo->format('jS') }} through the {{ $today->format('jS') }}</h1>
         </div>
         <div class="row">
             <div class="col-md"></div>
@@ -37,7 +37,19 @@
                     </div>
 
                     <div class="row">
-                        <p>Notes:</p>
+                        <div class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown">Notes</button>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item">
+                                    <hr>
+                                    <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, adipisci amet blanditiis dolores ea eveniet illo ipsa itaque magni maiores non odit praesentium, quae sequi sit soluta sunt! Expedita, ipsam?</span></p>
+                                </div>
+                                <div class="dropdown-item">
+                                    <hr>
+                                    <p>example note</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             @endforeach

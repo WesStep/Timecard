@@ -229,15 +229,15 @@ class PageController extends Controller
         // Get the shift hours and notes of employees from the last seven days
         $shifts = [];
 
-        foreach($employee as $employee)
-        {
-            $userShifts = DB::table('shifts')
-                ->where(['id' => $employee->id])
+//        foreach($employee as $employee)
+//        {
+//            $userShifts = DB::table('shifts')
+//                ->where(['user_id' => $employee->id])
 //                ->groupBy('company', 'duration_in_minutes')
 //                ->orderBy('company')
-                ->pluck('duration_in_minutes', 'note'); // FIX THIS
-        }
-        dd($userShifts);
+//                ->pluck('duration_in_minutes', 'note'); // FIX THIS
+//        }
+//        dd($userShifts);
         // Get the current companies
         $companies = DB::table('companies')->where('is_deleted', false)->orderBy('name')->get();
         return view('dashboard.statistics',

@@ -50,6 +50,10 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.dropdown-menu {
+    max-width: 250px;
+}
+
 .margin-bottom {
     margin-bottom: 2rem;
 }
@@ -202,7 +206,8 @@ a {
 /*- 3 - Other ELements -----*/
 /*--------------------------*/
 
-input, button, label, textarea {
+input, button, label, textarea
+{
     font-family: 'Josefin Sans', sans-serif;
 }
 
