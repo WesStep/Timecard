@@ -42,15 +42,15 @@
                             <div class="dropdown-menu">
                                 <div class="dropdown-item">
                                     <hr>
-                                    <p style="note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, adipisci amet blanditiis dolores ea eveniet illo ipsa itaque magni maiores non</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, adipisci amet blanditiis dolores ea eveniet illo ipsa itaque magni maiores non</p>
                                 </div>
                                 <div class="dropdown-item">
                                     <hr>
-                                    <p style="note">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, adipisci amet blanditiis dolores ea eveniet illo ipsa itaque magni maiores non</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, adipisci amet blanditiis dolores ea eveniet illo ipsa itaque magni maiores non</p>
                                 </div>
                                 <div class="dropdown-item">
                                     <hr>
-                                    <p class="note">example note</p>
+                                    <p>example note</p>
                                 </div>
                             </div>
                         </div>
