@@ -42,6 +42,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="clock_in_time">Clock In Time:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="datetime-local" name="clock_in_time" value="{{ $currentTime }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 @csrf
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" name="clock-in" class="btn btn-lg btn-success">Clock In</button>
@@ -54,6 +62,14 @@
                                 <label for="note" class="col-md-4 col-form-label text-md-right">Note</label>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" name="note" placeholder="What was accomplished?">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-4 text-md-right">
+                                    <label for="clock_out_time">Clock Out Time:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="datetime-local" name="clock_out_time" value="{{ $currentTime }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">

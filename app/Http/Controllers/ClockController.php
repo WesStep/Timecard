@@ -14,17 +14,26 @@ class ClockController extends Controller
     {
         // Get the currently logged in user
         $user = Auth::user();
-        // Get the current date and time time
-        $dateTime = new Carbon();
         // Verify that the company the user submitted is legitimate
         $this->validate($request, [
-            'company' => 'required|string|max:100|exists:companies,name' // Add verification: if is_deleted is true, then don't allow
+            'company' => 'required|string|max:100|exists:companies,name',
+            'clock_in_time' => 'required|date' // Add verification: if is_deleted is true, then don't allow
         ]);
+        // Get the clock in dateTime stamp
+        $clock_in_time = new \DateTime($request->input('clock_in_time'));
+        $clock_in_year = $clock_in_time->format('Y');
+        $clock_in_month = $clock_in_time->format('m');
+        $clock_in_day = $clock_in_time->format('d');
+        $clock_in_hour = $clock_in_time->format('H');
+        $clock_in_minute = $clock_in_time->format('i');
+        $clock_in_second = $clock_in_time->format('s');
+        $clock_in_time_zone = $clock_in_time->format('T');
+        $clock_in_time = Carbon::create($clock_in_year, $clock_in_month, $clock_in_day, $clock_in_hour, $clock_in_minute, $clock_in_second);
         // Create the new shift in the database
         $shift = new Shift([
             'user_id' => $user->id,
             'company' => $request->input('company'),
-            'clock_in_time' => $dateTime,
+            'clock_in_time' => $clock_in_time,
             'clock_out_time' => null,
             'duration_in_minutes' => null,
             'note' => null,
@@ -43,7 +52,11 @@ class ClockController extends Controller
     {
         // Validate the user's note for the shift
         $validatedData = $request->validate([
-            'note' => 'required|max:140|string'
+            'note' => 'required|max:140|string',
+            'clock_out_time' => [
+                'required',
+                'date'
+                ]
         ]);
         // Get the currently logged in user
         $user = Auth::user();
@@ -51,7 +64,15 @@ class ClockController extends Controller
         $clock_in_time = DB::table('shifts')->where('user_id', $user->id)->latest()->pluck('clock_in_time');
         $clock_in_time = Carbon::parse($clock_in_time[0]);
         // Get the clock out dateTime stamp
-        $clock_out_time = new Carbon();
+        $clock_out_time = new \DateTime($request->input('clock_out_time'));
+        $clock_out_year = $clock_out_time->format('Y');
+        $clock_out_month = $clock_out_time->format('m');
+        $clock_out_day = $clock_out_time->format('d');
+        $clock_out_hour = $clock_out_time->format('H');
+        $clock_out_minute = $clock_out_time->format('i');
+        $clock_out_second = $clock_out_time->format('s');
+        $clock_out_time_zone = $clock_out_time->format('T');
+        $clock_out_time = Carbon::create($clock_out_year, $clock_out_month, $clock_out_day, $clock_out_hour, $clock_out_minute, $clock_out_second);
         // Subtract the clock in time from the clock out time to get the duration in minutes
         $duration_in_minutes = $clock_out_time->diffInMinutes($clock_in_time);
         // Retrieve the user's pay rate and calculate the amount to pay

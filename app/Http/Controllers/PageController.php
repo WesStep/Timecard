@@ -81,9 +81,13 @@ class PageController extends Controller
         $user = Auth::user();
         $is_clocked_in = $user->is_clocked_in;
 
+        // Get the current date and time time
+        $currentTime = new Carbon();
+        $currentTime = date("Y-m-d\TH:i", strtotime($currentTime));
+
         // Get the list of companies from the database
         $companies = DB::table('companies')->where('is_deleted', 'false')->orderBy('name')->get();
-        return view('dashboard.clock', ['role' => session('role'), 'is_clocked_in' => $is_clocked_in, 'companies' => $companies]);
+        return view('dashboard.clock', ['role' => session('role'), 'is_clocked_in' => $is_clocked_in, 'companies' => $companies, 'currentTime' => $currentTime]);
     }
 
     public function getCompany()
