@@ -110,20 +110,34 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
             'as' => 'dashboard/manage/edit'
         ]);
 
-        Route::get('pay', [
-            'uses' => 'PageController@getPay',
-            'as' => 'dashboard/pay'
-        ]);
+        Route::group(['prefix' => 'pay'], function () {
 
-        Route::get('pay/show', [
-            'uses' => 'PayController@getEmployee',
-            'as' => 'dashboard/pay/show'
-        ]);
+            Route::get('', [
+                'uses' => 'PageController@getPay',
+                'as' => 'dashboard/pay'
+            ]);
 
-        Route::post('pay', [
-            'uses' => 'PayController@recordPayment',
-            'as' => 'dashboard/pay'
-        ]);
+            Route::get('show', [
+                'uses' => 'PayController@getEmployee',
+                'as' => 'dashboard/pay/show'
+            ]);
+
+            Route::post('', [
+                'uses' => 'PayController@recordPayment',
+                'as' => 'dashboard/pay'
+            ]);
+
+            Route::post('edit', [
+                'uses' => 'PayController@editShift',
+                'as' => 'pay/edit'
+            ]);
+
+            Route::post('delete', [
+                'uses' => 'PayController@deleteShift',
+                'as' => 'pay/delete'
+            ]);
+
+        });
 
         Route::group(['prefix' => 'statistics'], function() {
 

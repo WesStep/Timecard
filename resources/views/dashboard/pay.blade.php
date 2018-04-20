@@ -59,12 +59,13 @@
         </div>
         <hr>
         @foreach($shifts as $shift)
-        <form class="shiftForm" action="index.html" method="post">
-            <div class="row">
+        <div class="row">
+            <form class="editShift" action="{{ route('pay/edit') }}" method="post">
+                <input type="hidden" id="employee_id" name="employee_id" value="{{ $id }}">
                 <input type="hidden" name="shift_id" value="{{ $shift[0] }}">
                 <div class="col-md">
                     <p class="mb-0">
-                        <select class="form-control" name="company">
+                        <select class="form-control" name="company_id">
                             @foreach($companies as $company)
                                 @if($company->name == $shift[1])
                                     <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
@@ -87,11 +88,22 @@
                 <div class="col-md">
                     <p class="mb-0">${{ $shift[5] }}</p>
                 </div>
+            </form>
+
+            <?php // FIXME: This button should open up a little box with a delete shift form, requesting the reason for deletion, and a confirmation button. ?>
+
+            <button type="button" name="deleteFormToggle"><strong>X</strong></button>
+
+            <?php // FIXME: This form should be hidden and in its own box. When its respective button is pressed, it should appear near to it, allowing the payroll admin to enter in a reason for deletion of the shift, and to confirm deletion. ?>
+
+            <form action="{{ route('pay/delete') }}">
+                <input type="hidden" id="employee_id" name="employee_id" value="{{ $id }}">
+                <input type="hidden" name="shift_id" value="{{ $shift[0] }}">
                 <div class="col-md-1">
-                    <button type="button" class="btn btn-sm btn-danger mb-0"><strong>X</strong></button>
+                    <button type="submit" class="btn btn-sm btn-danger mb-0"><strong>X</strong></button>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
         <hr>
         @endforeach
         <div class="row">

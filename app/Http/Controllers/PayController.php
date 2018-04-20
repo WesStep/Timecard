@@ -17,12 +17,13 @@ class PayController extends Controller
 
         // Select all unpaid shifts of the employee
         $unpaidShifts = DB::table('shifts')
-            ->where([
-                ['user_id', $id],
-                ['has_been_paid', false]
-            ])
-            ->orderBy('clock_in_time', 'desc')
-            ->get();
+        ->where([
+            ['user_id', $id],
+            ['has_been_paid', false],
+            ['is_deleted', false]
+        ])
+        ->orderBy('clock_in_time', 'desc')
+        ->get();
 
         // Select all companies that are not deleted
         $companies = DB::table('companies')
@@ -41,7 +42,14 @@ class PayController extends Controller
             $clock_out_time = date("Y-m-d\TH:i", strtotime($shift->clock_out_time));
             $duration = $shift->duration_in_minutes;
             $amount = $shift->amount_to_pay;
-            array_push($shifts, [$id, $company, $clock_in_time, $clock_out_time, $duration, $amount]);
+            array_push($shifts, [
+                $id,
+                $company,
+                $clock_in_time,
+                $clock_out_time,
+                $duration,
+                $amount
+            ]);
             $i ++;
         }
 
@@ -70,6 +78,47 @@ class PayController extends Controller
         ]);
     }
 
+    /**
+     * Sets the associated shift to an 'is_deleted' state.
+     *
+     * Since it will be set to a deleted state, it will not actually be
+     * removed from the DB, but it will NOT show up anymore in the client-
+     * facing views.
+     *
+     * @param  Request $request [Contains the shift in question.]
+     * @return [void]
+     */
+    public function deleteShift(Request $request)
+    {
+        $this->validate($request, [
+            'employee_id' => 'required|exists:users,id|integer',
+            'shift_id' => 'required|exists:shifts,id|integer'
+        ]);
+        DB::table('shifts')->where([
+            ['user_id', '=', 'employee_id'],
+            ['id', '=', 'shift_id']
+        ])->update(['is_deleted' => true]);
+
+        return redirect()->back()->with('info', 'Shift has been deleted!');
+    }
+
+    /**
+     * Updates the associated shift according to the changes the payroll admin
+     * makes to it.
+     *
+     * @param  Request $request [Contains the shift info and changes to make.]
+     * @return [void]
+     */
+    public function updateShift(Request $request)
+    {
+
+    }
+
+    /**
+     * Records all shifts currently unpaid for employee as 'paid'.
+     * @param  Request $request [Contains the shifts to mark as paid.]
+     * @return [void]
+     */
     public function recordPayment(Request $request)
     {
         // Validate the correct input for the employee ID

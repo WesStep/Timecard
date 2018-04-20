@@ -25,6 +25,7 @@ class CreateShiftsTable extends Migration
             $table->float('amount_to_pay', 5, 2)->nullable();
             $table->boolean('has_been_paid');
             $table->boolean('is_deleted');
+            $table->string('reason_for_deletion', 140)->nullable(); // Make this work with the current system.
         });
     }
 

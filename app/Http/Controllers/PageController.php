@@ -90,11 +90,6 @@ class PageController extends Controller
         return view('dashboard.clock', ['role' => session('role'), 'is_clocked_in' => $is_clocked_in, 'companies' => $companies, 'currentTime' => $currentTime]);
     }
 
-    public function getDisclaimer()
-    {
-        return view('main.disclaimer', ['role' => session('role')]);
-    }
-
     public function getCompany()
     {
         $companies = DB::table('companies')->where('is_deleted', 'false')->orderBy('name')->get();
@@ -116,6 +111,11 @@ class PageController extends Controller
         // Find employee's info for each employee account
         $employee = DB::table('users')->where('role_id', $role_id)->get();
         return view('dashboard.delete', ['role' => session('role'), 'users' => $employee]);
+    }
+
+    public function getDisclaimer()
+    {
+        return view('main.disclaimer', ['role' => session('role')]);
     }
 
     public function getEdit()
