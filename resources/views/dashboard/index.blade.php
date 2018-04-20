@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a class="btn btn-lg btn-warning" href="{{ route('dashboard/edit') }}">Edit Info</a>
-                <a class="btn btn-lg btn-warning" href="{{ route('dashboard/manage') }}">Manage Accounts</a>
+                <!-- <a class="btn btn-lg btn-warning" href="{{ route('dashboard/manage') }}">Manage Accounts</a> -->
                 <a class="btn btn-lg btn-success" href="{{ route('dashboard/pay') }}">Manage Payments</a>
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-md-12">
                 <a class="btn btn-lg btn-warning" href="{{ route('dashboard/edit') }}">Edit Info</a>
-                <a class="btn btn-lg btn-warning" href="{{ route('dashboard/manage') }}">Manage Accounts</a>
+                <!-- <a class="btn btn-lg btn-warning" href="{{ route('dashboard/manage') }}">Manage Accounts</a> -->
                 <a class="btn btn-lg btn-warning" href="{{ route('dashboard/company') }}">Manage Companies</a>
                 <a class="btn btn-lg btn-info" href="{{ route('dashboard/statistics/week') }}">Business Stats</a>
             </div>

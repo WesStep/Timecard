@@ -21,6 +21,11 @@ Route::get('login', [
     'as' => 'login'
 ]);
 
+Route::get('disclaimer', [
+    'uses' => 'PageController@getDisclaimer',
+    'as' => 'disclaimer'
+]);
+
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
 
     Route::get('/', [

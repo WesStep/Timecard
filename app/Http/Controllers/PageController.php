@@ -90,6 +90,11 @@ class PageController extends Controller
         return view('dashboard.clock', ['role' => session('role'), 'is_clocked_in' => $is_clocked_in, 'companies' => $companies, 'currentTime' => $currentTime]);
     }
 
+    public function getDisclaimer()
+    {
+        return view('main.disclaimer', ['role' => session('role')]);
+    }
+
     public function getCompany()
     {
         $companies = DB::table('companies')->where('is_deleted', 'false')->orderBy('name')->get();

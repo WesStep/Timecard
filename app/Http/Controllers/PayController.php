@@ -14,6 +14,7 @@ class PayController extends Controller
             'employeeToPay' => 'integer|exists:users,id'
         ]);
         $id = $request->input('employeeToPay');
+
         // Select all unpaid shifts of the employee
         $unpaidShifts = DB::table('shifts')
             ->where([
@@ -22,17 +23,25 @@ class PayController extends Controller
             ])
             ->orderBy('clock_in_time', 'desc')
             ->get();
+
+        // Select all companies that are not deleted
+        $companies = DB::table('companies')
+        ->where('is_deleted', false)
+        ->orderBy('name')
+        ->get();
+
         // Create the shifts array
         $shifts = array();
         $i = 0;
         foreach($unpaidShifts as $shift)
         {
+            $id = $shift->id;
             $company = $shift->company;
-            $clock_in_time = new Carbon($shift->clock_in_time);
-            $clock_out_time = new Carbon($shift->clock_out_time);
+            $clock_in_time = date("Y-m-d\TH:i", strtotime($shift->clock_in_time));
+            $clock_out_time = date("Y-m-d\TH:i", strtotime($shift->clock_out_time));
             $duration = $shift->duration_in_minutes;
             $amount = $shift->amount_to_pay;
-            array_push($shifts, [$company, $clock_in_time, $clock_out_time, $duration, $amount]);
+            array_push($shifts, [$id, $company, $clock_in_time, $clock_out_time, $duration, $amount]);
             $i ++;
         }
 
@@ -41,15 +50,24 @@ class PayController extends Controller
         $totalTimeWorked = 0;
         foreach($shifts as $shift)
         {
-            $totalToPay += $shift[4];
-            $totalTimeWorked += $shift[3];
+            $totalToPay += $shift[5];
+            $totalTimeWorked += $shift[4];
         }
+
         // Get the employee role_id
         $role_id = DB::table('roles')->where('name', 'employee')->pluck('id');
 
         // Find employee's info for each employee account
         $users = DB::table('users')->where('role_id', $role_id)->get();
-        return view('dashboard/pay', ['role' => session('role'), 'shifts' => $shifts, 'users' => $users, 'totalPay' => $totalToPay, 'totalWorked' => $totalTimeWorked, 'id' => $id]);
+        return view('dashboard/pay', [
+            'role' => session('role'),
+            'shifts' => $shifts,
+            'users' => $users,
+            'totalPay' => $totalToPay,
+            'totalWorked' => $totalTimeWorked,
+            'id' => $id,
+            'companies' => $companies
+        ]);
     }
 
     public function recordPayment(Request $request)

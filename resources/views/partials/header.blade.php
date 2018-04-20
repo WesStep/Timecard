@@ -30,9 +30,9 @@
                 </li>
                 @endif
                 @if($role[0] == 'payroll admin' || $role[0] == 'business owner')
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link text-light" href="{{ route('dashboard/manage') }}">Manage Accounts</a>
-                </li>
+                </li> -->
                 @endif
                 @if($role[0] == 'payroll admin')
                 <li class="nav-item">

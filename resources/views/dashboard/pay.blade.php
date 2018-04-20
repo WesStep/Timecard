@@ -59,26 +59,39 @@
         </div>
         <hr>
         @foreach($shifts as $shift)
-        <div class="row">
-            <div class="col-md">
-                <p class="mb-0">{{ $shift[0] }}</p>
+        <form class="shiftForm" action="index.html" method="post">
+            <div class="row">
+                <input type="hidden" name="shift_id" value="{{ $shift[0] }}">
+                <div class="col-md">
+                    <p class="mb-0">
+                        <select class="form-control" name="company">
+                            @foreach($companies as $company)
+                                @if($company->name == $shift[1])
+                                    <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
+                                @else
+                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </p>
+                </div>
+                <div class="col-md">
+                    <p class="mb-0"><input class="form-control" type="datetime-local" name="clock_in_time" value="{{ $shift[2] }}"></p>
+                </div>
+                <div class="col-md">
+                    <p class="mb-0"><input class="form-control" type="datetime-local" name="clock_out_time" value="{{ $shift[3] }}"></p>
+                </div>
+                <div class="col-md">
+                    <p class="mb-0">{{ floor(round($shift[4] / 60, 2)) }} hours, {{ $shift[4] % 60 }} minutes</p>
+                </div>
+                <div class="col-md">
+                    <p class="mb-0">${{ $shift[5] }}</p>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-sm btn-danger mb-0"><strong>X</strong></button>
+                </div>
             </div>
-            <div class="col-md">
-                <p class="mb-0">{{ $shift[1]->format('h:i A') . " on " . $shift[1]->format('l') . " the " . $shift[1]->format('jS') }}</p>
-            </div>
-            <div class="col-md">
-                <p class="mb-0">{{ $shift[2]->format('h:i A') . " on " . $shift[2]->format('l') . " the " . $shift[2]->format('jS') }}</p>
-            </div>
-            <div class="col-md">
-                <p class="mb-0">{{ floor(round($shift[3] / 60, 2)) }} hours, {{ $shift[3] % 60 }} minutes</p>
-            </div>
-            <div class="col-md">
-                <p class="mb-0">${{ $shift[4] }}</p>
-            </div>
-            <div class="col-md-1">
-                <button type="button" class="btn btn-sm btn-danger mb-0"><strong>X</strong></button>
-            </div>
-        </div>
+        </form>
         <hr>
         @endforeach
         <div class="row">
