@@ -38,7 +38,7 @@ class PageController extends Controller
 
         // Get the shifts for the month according to the user
         $daysInMonth = $firstOfTheMonth->daysInMonth - 1;
-        $monthShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company, has_been_paid')
+        $monthShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company_id, has_been_paid')
             ->where('user_id', $user->id)
             ->wherebetween('created_at', array($monthDays[0][0], $monthDays[$daysInMonth][0]))
             ->orderBy('created_at')->get(); // To access clock in time: $monthDays[$i]['clock_in_time']
@@ -53,6 +53,9 @@ class PageController extends Controller
             $x = 0;
             foreach ($monthShifts as $shift)
             {
+                // Get the company name from the company_id
+                $company_name = DB::table('companies')->where('id', $shift['company_id'])->pluck('name');
+
                 /*
                  * If the shift day number is equal to the week day number, then add the shift to the day array for
                  * shifts. If not, continue with the loop.
@@ -62,7 +65,7 @@ class PageController extends Controller
                     array_push($monthDays[$i][3], []);
                     $clock_in_time = new Carbon($shift['clock_in_time']);
                     $clock_out_time = new Carbon($shift['clock_out_time']);
-                    array_push($monthDays[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $shift['company'], $shift['amount_to_pay'], $shift['has_been_paid']);
+                    array_push($monthDays[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $company_name[0], $shift['amount_to_pay'], $shift['has_been_paid']);
                     $x ++;
                 }
             }
@@ -87,6 +90,8 @@ class PageController extends Controller
 
         // Get the list of companies from the database
         $companies = DB::table('companies')->where('is_deleted', 'false')->orderBy('name')->get();
+
+        // Redirect back to the clock page
         return view('dashboard.clock', ['role' => session('role'), 'is_clocked_in' => $is_clocked_in, 'companies' => $companies, 'currentTime' => $currentTime]);
     }
 
@@ -145,10 +150,10 @@ class PageController extends Controller
         } // For getting down to the week day number, use this: $lastWeek[$i][1]
 
         // Get the shifts for the last week according to the user
-        $lastWeekShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company, has_been_paid')
-            ->where('user_id', $user->id)
-            ->wherebetween('created_at', array($lastWeek[6][0], $lastWeek[0][0]))
-            ->orderBy('created_at', 'desc')->get(); // To access clock in time: $lastWeekShifts[$i]['clock_in_time']
+        $lastWeekShifts = Shift::selectRaw('day(created_at) day, clock_in_time, clock_out_time, duration_in_minutes, note, amount_to_pay, company_id, has_been_paid')
+        ->where('user_id', $user->id)
+        ->wherebetween('created_at', array($lastWeek[6][0], $lastWeek[0][0]))
+        ->orderBy('created_at', 'desc')->get(); // To access clock in time: $lastWeekShifts[$i]['clock_in_time']
 
         $i = 0;
         foreach ($lastWeek as $day)
@@ -160,6 +165,9 @@ class PageController extends Controller
             $x = 0;
             foreach ($lastWeekShifts as $shift)
             {
+                // Get the company name from the company_id
+                $company_name = DB::table('companies')->where('id', $shift['company_id'])->pluck('name');
+
                 /*
                  * If the shift day number is equal to the week day number, then add the shift to the day array for
                  * shifts. If not, continue with the loop.
@@ -169,7 +177,7 @@ class PageController extends Controller
                     array_push($lastWeek[$i][3], []);
                     $clock_in_time = new Carbon($shift['clock_in_time']);
                     $clock_out_time = new Carbon($shift['clock_out_time']);
-                    array_push($lastWeek[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $shift['company'], $shift['amount_to_pay'], $shift['has_been_paid']);
+                    array_push($lastWeek[$i][3][$x], $shift['day'], $clock_in_time, $clock_out_time, $shift['duration_in_minutes'], $shift['note'], $company_name[0], $shift['amount_to_pay'], $shift['has_been_paid']);
                     $x ++;
                 }
             }
@@ -238,15 +246,15 @@ class PageController extends Controller
         // Get the shift hours and notes of employees from the last seven days
         $shifts = [];
 
-//        foreach($employee as $employee)
-//        {
-//            $userShifts = DB::table('shifts')
-//                ->where(['user_id' => $employee->id])
-//                ->groupBy('company', 'duration_in_minutes')
-//                ->orderBy('company')
-//                ->pluck('duration_in_minutes', 'note'); // FIX THIS
-//        }
-//        dd($userShifts);
+        // foreach($employee as $employee)
+        // {
+        // $userShifts = DB::table('shifts')
+        // ->where(['user_id' => $employee->id])
+        // ->groupBy('company', 'duration_in_minutes')
+        // ->orderBy('company')
+        // ->pluck('duration_in_minutes', 'note'); // FIX THIS
+        //  }
+        // dd($userShifts);
         // Get the current companies
         $companies = DB::table('companies')->where('is_deleted', false)->orderBy('name')->get();
         return view('dashboard.statistics',

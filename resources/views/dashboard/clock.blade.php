@@ -34,11 +34,13 @@
                                     <label for="company" class="form-label">Clock in For</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="company" id="company">
-                                        @foreach($companies as $company)
-                                            <option value="{{ $company->name }}">{{ $company->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <p>
+                                        <select class="form-control" name="company_id" id="company_id">
+                                            @foreach($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
                                 </div>
                             </div>
                             <div class="form-group row">

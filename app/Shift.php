@@ -7,7 +7,7 @@ use Auth;
 
 class Shift extends Model
 {
-    protected $fillable = ['user_id', 'company', 'clock_in_time', 'clock_out_time', 'duration_in_minutes', 'note', 'amount_to_pay', 'has_been_paid', 'is_deleted'];
+    protected $fillable = ['user_id', 'company_id', 'clock_in_time', 'clock_out_time', 'duration_in_minutes', 'note', 'amount_to_pay', 'has_been_paid', 'is_deleted', 'reason_for_deletion'];
 
     public function users()
     {

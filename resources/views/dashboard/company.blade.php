@@ -46,11 +46,13 @@
                                     <label for="companyToEdit" class="form-label">Company to Edit</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="companyToEdit" id="companyToEdit">
-                                        @foreach($companies as $company)
-                                            <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <p>
+                                        <select class="form-control" name="companyToEdit" id="companyToEdit">
+                                            @foreach($companies as $company)
+                                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -77,11 +79,13 @@
                                     <label for="companyToDelete" class="form-label">Company to Delete</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <select class="form-control" name="companyToDelete" id="companyToDelete">
-                                        @foreach($companies as $company)
-                                            <option value="{{ $company->name }}">{{ $company->name }}</option>
-                                        @endforeach
-                                    </select>
+                                    <p>
+                                        <select class="form-control" name="companyToDelete" id="companyToDelete">
+                                            @foreach($companies as $company)
+                                                <option value="{{ $company->name }}">{{ $company->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </p>
                                 </div>
                             </div>
                             @csrf

@@ -17,9 +17,12 @@ class ClockController extends Controller
 
         // Verify that the company the user submitted is legitimate
         $this->validate($request, [
-            'company' => 'required|string|max:100|exists:companies,name',
+            'company_id' => 'required|integer|exists:companies,id',
             'clock_in_time' => 'required|date'
         ]);
+
+        // Set the company_id variable
+        $company_id = $request->input('company_id');
 
         // Get the clock in dateTime stamp
         $clock_in_time = new \DateTime($request->input('clock_in_time'));
@@ -38,10 +41,11 @@ class ClockController extends Controller
             $clock_in_minute,
             $clock_in_second
         );
+        
         // Create the new shift in the database
         $shift = new Shift([
             'user_id' => $user->id,
-            'company' => $request->input('company'),
+            'company_id' => $company_id,
             'clock_in_time' => $clock_in_time,
             'clock_out_time' => null,
             'duration_in_minutes' => null,
