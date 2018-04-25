@@ -2,7 +2,7 @@
 
 @section('jumbotron')
     <div class="jumbotron bg-success">
-        <h1 class="display-3 text-center">Manage Payments</h1>
+        <h1 class="display-3 text-center">Manage Shifts</h1>
     </div>
 @endsection
 

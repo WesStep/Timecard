@@ -200,7 +200,7 @@ class PayController extends Controller
     /**
      * Records all shifts currently unpaid for employee as 'paid'.
      * @param  Request $request [Contains the shifts to mark as paid.]
-     * @return [void]
+     * @return redirect
      */
     public function recordPayment(Request $request)
     {

@@ -36,7 +36,7 @@
                 @endif
                 @if($role[0] == 'payroll admin')
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('dashboard/pay') }}">Manage Payments</a>
+                    <a class="nav-link text-light" href="{{ route('dashboard/pay') }}">Manage Shifts</a>
                 </li>
                 @elseif($role[0] == 'business owner')
                 <li class="nav-item">

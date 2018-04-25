@@ -31,7 +31,7 @@
             <div class="col-md-12">
                 <a class="btn btn-lg btn-warning" href="{{ route('dashboard/edit') }}">Edit Info</a>
                 <!-- <a class="btn btn-lg btn-warning" href="{{ route('dashboard/manage') }}">Manage Accounts</a> -->
-                <a class="btn btn-lg btn-success" href="{{ route('dashboard/pay') }}">Manage Payments</a>
+                <a class="btn btn-lg btn-success" href="{{ route('dashboard/pay') }}">Manage Shifts</a>
             </div>
         </div>
         @elseif($role[0] == 'business owner')

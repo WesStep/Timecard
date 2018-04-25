@@ -30,10 +30,14 @@ class CompanyController extends Controller
             'companyToDelete' => 'string|max:100|exists:companies,name'
         ]);
 
-        // If it passes, then set the 'is_deleted' status to true. This will effectively remove it from the UI.
+        /**
+         * If it passes, then set the 'is_deleted' status to true.
+         * This will effectively remove it from the UI.
+         */
+
         DB::table('companies')
-            ->where('name', $request->input('companyToDelete'))
-            ->update(['is_deleted' => true]);
+        ->where('name', $request->input('companyToDelete'))
+        ->update(['is_deleted' => true]);
 
         return redirect()->back()->with('info', 'Company Deleted!');
     }
