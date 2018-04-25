@@ -84,7 +84,7 @@ class PageController extends Controller
         $user = Auth::user();
         $is_clocked_in = $user->is_clocked_in;
 
-        // Get the current date and time time
+        // Get the current date and time time and format to datetime-local
         $currentTime = new Carbon();
         $currentTime = date("Y-m-d\TH:i", strtotime($currentTime));
 
@@ -229,52 +229,19 @@ class PageController extends Controller
         return view('auth.register', ['role' => session('role'), 'rolesToAssign' => $rolesToAssign]);
     }
 
-    public function getStatsWeek()
+    /**
+     * If no date range is specified, then default to the last week for shifts
+     * to display. If a date range is specified, then display shifts for that
+     * time period.
+     */
+    public function getStats()
     {
-        // Business stats page [business owner]
+       // Get the employee role_id
+       $role_id = DB::table('roles')->where('name', 'employee')->pluck('id');
 
-        // Grab the Current day and the day a week ago
-        $today = Carbon::now();
-        $weekAgo = Carbon::now()->subDays(6);
+       // Find employee's info for each employee account
+       $employees = DB::table('users')->where('role_id', $role_id)->get();
 
-        // Get the employee role_id
-        $role_id = DB::table('roles')->where('name', 'employee')->pluck('id');
-
-        // Find employee's info for each employee account
-        $employee = DB::table('users')->where('role_id', $role_id)->get();
-
-        // Get the shift hours and notes of employees from the last seven days
-        $shifts = [];
-
-        // foreach($employee as $employee)
-        // {
-        // $userShifts = DB::table('shifts')
-        // ->where(['user_id' => $employee->id])
-        // ->groupBy('company', 'duration_in_minutes')
-        // ->orderBy('company')
-        // ->pluck('duration_in_minutes', 'note'); // FIX THIS
-        //  }
-        // dd($userShifts);
-        // Get the current companies
-        $companies = DB::table('companies')->where('is_deleted', false)->orderBy('name')->get();
-        return view('dashboard.statistics',
-            [
-                'role' => session('role'),
-                'users' => $employee,
-                'companies' => $companies,
-                'today' => $today,
-                'weekAgo' => $weekAgo
-            ]
-        );
-    }
-
-    public function getStatsMonth()
-    {
-
-    }
-
-    public function getStatsYear()
-    {
-
+       return view('dashboard.statistics', ['role' => session('role'), 'employees' => $employees]);
     }
 }

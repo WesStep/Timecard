@@ -138,29 +138,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
             ]);
 
         });
+        
+        Route::get('statistics', [
+            'uses' => 'PageController@getStats',
+            'as' => 'dashboard/statistics'
+        ]);
 
-        Route::group(['prefix' => 'statistics'], function() {
-
-            Route::get('week', [
-                'uses' => 'PageController@getStatsWeek',
-                'as' => 'dashboard/statistics/week'
-            ]);
-
-            Route::get('month', [
-                'uses' => 'PageController@getStatsMonth',
-                'as' => 'dashboard/statistics/month'
-            ]);
-
-            Route::get('year', [
-                'uses' => 'PageController@getStatsYear',
-                'as' => 'dashboard/statistics/year'
-            ]);
-
-        });
-
-        Route::get('show/{id}', [
-            'uses' => 'EditController@showEmployee',
-            'as' => 'dashboard/showEmployee'
+        Route::get('statistics/show', [
+            'uses' => 'StatsController@getStats',
+            'as' => 'dashboard/statistics/show'
         ]);
 
     });

@@ -9,46 +9,66 @@
 @section('content')
     <div class="container">
         <div class="row mb-4">
-            <div class="col-md-4">
-                <h3 class="mr-2">Quick Date Range:</h3>
+            @if(Session::has('info'))
+            <div class="col-md-12">
+                <p class="alert alert-info">{{ Session::get('info') }}</p>
             </div>
-            <div class="col-md-8">
-                <button class="btn btn-info" type="button" name="pastWeek">Past Week</button>
-                <button class="btn btn-info" type="button" name="pastMonth">Past Month</button>
-                <button class="btn btn-info" type="button" name="pastQuarter">Past Quarter</button>
-                <button class="btn btn-info" type="button" name="pastYear">Past Year</button>
+            @endif
+            <div class="col-md-3">
+                <h3 class="text-md-right">Quick Date:</h3>
+            </div>
+            <div class="col-md-9">
+                <form action="{{ route('dashboard/statistics/show') }}" method="get">
+                    @csrf
+                    <div class="form-check form-check-inline">
+                        <label class="radio-container" for="week">Past Week
+                            <input class="form-check-input" type="radio" name="length" id="week" value="week" checked>
+                            <span class="radio-checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="radio-container" for="month">Past Month
+                            <input class="form-check-input" type="radio" name="length" id="month" value="month">
+                            <span class="radio-checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="radio-container" for="quarter">Past Quarter
+                            <input class="form-check-input" type="radio" name="length" id="quarter" value="quarter">
+                            <span class="radio-checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="radio-container" for="year">Past Year
+                            <input class="form-check-input" type="radio" name="length" id="year" value="year">
+                            <span class="radio-checkmark"></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-info" name="getStats">Go</button>
+                </form>
             </div>
         </div>
-        <form class="row" action="index.html" method="post">
-            <div class="col-md-4">
-                <h3>or Select Date Range:</h3>
+        <form class="row" action="{{ route('dashboard/statistics/show') }}" method="get">
+            <input type="hidden" name="length" value="custom">
+            <div class="col-md-3">
+                <h3 conditionclass="text-md-right">or Select Date:</h3>
             </div>
             <div class="col-md-3">
-                <input class="form-control" type="datetime-local" name="startDate">
+                <input class="form-control" type="date" name="startDate" required>
             </div>
             <div class="col-md-1">
-                <h3 class="ml-2 mr-2">to</h3>
+                <h3 class="text-md-center">to</h3>
             </div>
             <div class="col-md-3">
-                <input class="form-control" type="datetime-local" name="endDate">
+                <input class="form-control" type="date" name="endDate" required>
             </div>
-            <div class="col-md-1">
-                <button class="btn btn-success" type="submit" name="search">Go</button>
+            <div class="col-md-2">
+                <button class="btn btn-info" type="submit" name="getStats">Go</button>
             </div>
         </form>
         <hr>
-        <h1 class="text-center">Report:</h1>
-        <div class="row mb-3">
-            <div class="col-md">
-                <ul class="nav nav-tabs">
-                    @foreach($companies as $company)
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">{{ $company->name }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </div>
+        <h3 class="text-md-center">Report</h3>
+        <hr>
         <div class="row">
             <div class="col-md-2">
                 <p><strong>Employee Name</strong></p>
@@ -71,10 +91,10 @@
             </div>
         </div>
         <hr>
-        @foreach($users as $user)
+        @foreach($employees as $employee)
             <div class="row">
                 <div class="col-md-2">
-                    <p><strong>{{ $user->name }}</strong></p>
+                    <p><strong>{{ $employee->name }}</strong></p>
                 </div>
                 <div class="col-md-10">
                     <div class="row">
@@ -89,15 +109,18 @@
                         </div>
                         <div class="col-md text-md-center">
                             <div class="dropdown">
-                                <button class="btn btn-info dropdown-toggle" data-toggle="collapse" href="#collapseDetail{{ $user->id }}"></button>
+                                <button class="btn btn-info dropdown-toggle" data-toggle="collapse" href="#collapseDetail{{ $employee->id }}"></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="collapse row" id="collapseDetail{{ $user->id }}">
+            <div class="collapse row" id="collapseDetail{{ $employee->id }}">
                 <div class="card card-body">
                     <div class="row">
+                        <div class="col-md text-md-right">
+                            <p><strong>Company</strong></p>
+                        </div>
                         <div class="col-md">
                             <p><strong>Start Time</strong></p>
                         </div>
@@ -111,13 +134,27 @@
                             <p><strong>Notes</strong></p>
                         </div>
                     </div>
-                    <hr>
-                    @foreach($shifts as $shift)
-                        // MAKE THIS SECTION WORK
-                    @endforeach
+                    @isset($companies)
+                        @foreach($companies as $company)
+                            <hr>
+                            <div class="row">
+                                <div class="col-md text-md-right">
+                                    <p><strong>{{ $company->name }}</strong></p>
+                                </div>
+                                <div class="col-md">
+                                </div>
+                                <div class="col-md">
+                                </div>
+                                <div class="col-md">
+                                </div>
+                                <div class="col-md">
+                                </div>
+                            </div>
+                        @endforeach
+                    @endisset
                 </div>
             </div>
-        <hr>
-    @endforeach
+            <hr>
+        @endforeach
     </div>
 @endsection
