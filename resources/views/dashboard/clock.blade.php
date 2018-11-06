@@ -48,7 +48,7 @@
                                     <label for="clock_in_time">Clock In Time:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="datetime-local" name="clock_in_time" value="{{ $currentTime }}" required>
+                                    <input class="form-control currentTime" type="datetime-local" name="clock_in_time" value="{{ $currentTime }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -71,7 +71,7 @@
                                     <label for="clock_out_time">Clock Out Time:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="datetime-local" name="clock_out_time" value="{{ $currentTime }}" required>
+                                    <input class="form-control currentTime" type="datetime-local" name="clock_out_time" value="{{ $currentTime }}" required>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -92,4 +92,18 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+		$(document).ready(
+			function() {
+				setInterval(function() {
+					// Format for time: 2018-11-06T08:07, or Y-m-dTH:m
+					var currentTime =
+					$('.currentTime').value();
+				}, 60000);  //Delay here = 5 seconds
+			});
+    </script>
 @endsection
