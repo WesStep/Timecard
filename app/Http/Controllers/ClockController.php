@@ -32,7 +32,6 @@ class ClockController extends Controller
         $clock_in_hour = $clock_in_time->format('H');
         $clock_in_minute = $clock_in_time->format('i');
         $clock_in_second = $clock_in_time->format('s');
-        $clock_in_time_zone = $clock_in_time->format('T');
         $clock_in_time = Carbon::create(
             $clock_in_year,
             $clock_in_month,
@@ -66,7 +65,7 @@ class ClockController extends Controller
     public function clockOut(Request $request)
     {
         // Validate the user's note for the shift
-        $validatedData = $request->validate([
+        $this->validate($request, [
             'note' => 'required|max:140|string',
             'clock_out_time' => 'required|date'
         ]);
@@ -76,9 +75,9 @@ class ClockController extends Controller
 
         // Get the clock in dateTime stamp
         $clock_in_time = DB::table('shifts')
-        ->where('user_id', $user->id)
-        ->latest()
-        ->pluck('clock_in_time');
+			->where('user_id', $user->id)
+			->latest()
+			->pluck('clock_in_time');
         $clock_in_time = Carbon::parse($clock_in_time[0]);
 
         // Get the clock out dateTime stamp

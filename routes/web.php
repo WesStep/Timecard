@@ -136,8 +136,19 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
                 'uses' => 'PayController@deleteShift',
                 'as' => 'pay/delete'
             ]);
-
         });
+
+		/**
+		 * The business stats page will show the overall stats per employee
+		 * for the time period specified. It will default to the previous week
+		 * of information, but will also allow options to see the last week,
+		 * month, quarter, or year, as well as a custom date range. The way the
+		 * shifts will be displayed will be in a collapsable div so as to not
+		 * mess up the look of the page. The totals of shifts worked, hours
+		 * worked, and wages paid for the time period will be displayed for each
+		 * employee without needing to expand anything. The business owner will
+		 * be able to print the current report as it is shown on the webpage.
+		 */
         
         Route::get('statistics', [
             'uses' => 'PageController@getStats',
