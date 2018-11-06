@@ -1,0 +1,59 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "80:80"
+    networks:
+      - tc-net
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    networks:
+      - tc-net
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_DATABASE: "app_data"
+      MYSQL_USER: "app_user"
+      MYSQL_PASSWORD: "secret"
+    volumes:
+      - tcmysqldata:/var/lib/mysql
+    networks:
+      - tc-net
+  myadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: "mysql"
+    volumes:
+      - tcmysqldata:/var/lib/mysql
+    networks:
+      - tc-net
+    depends_on:
+      - mysql
+  redis:
+    image: redis:alpine
+    volumes:
+      - tcredisdata:/data
+    networks:
+      - tc-net
+networks:
+  tc-net:
+    driver: "bridge"
+volumes:
+  tcmysqldata:
+    driver: "local"
+  tcredisdata:
+    driver: "local"
