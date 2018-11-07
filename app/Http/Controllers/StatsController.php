@@ -107,11 +107,13 @@ class StatsController extends Controller
 			->get();
 
 		foreach ($shifts as $shift) {
-			$shift->clock_in_time = \DateTime::createFromFormat('Y-m-d H:i:s', $shift->clock_in_time)->format('j M Y \\a\\t g:i a');
+			$shift->clock_in_time_string = \DateTime::createFromFormat('Y-m-d H:i:s', $shift->clock_in_time)->format('j M Y \\a\\t g:i a');
 			if ($shift->clock_out_time != null) {
-				$shift->clock_out_time = \DateTime::createFromFormat('Y-m-d H:i:s', $shift->clock_out_time)->format('j M Y \\a\\t g:i a');
+				$shift->clock_out_time_string = \DateTime::createFromFormat('Y-m-d H:i:s', $shift->clock_out_time)->format('j M Y \\a\\t g:i a');
 			} else {
-				$shift->clock_out_time = \DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', time()))->format('j M Y \\a\\t g:i a');
+				$shift->clock_out_time_string = "Currently Working";
+				// Figure out the duration in minutes based off the start time of the shift and the current time.
+				$shift->duration_in_minutes = Carbon::now()->diffInMinutes(Carbon::parse($shift->clock_in_time));
 			}
 		}
 		return $shifts;
@@ -146,15 +148,17 @@ class StatsController extends Controller
 				->where('user_id', $employee->id)
 				->whereBetween('clock_in_time', [$startDate, $endDate])
 				->sum('duration_in_minutes');
-			$lastShift = DB::table('shifts')
+			$totals[$employee->name] = $total;
+
+			$currentShift = DB::table('shifts')
 				->where('user_id', $employee->id)
 				->where('clock_out_time', null)
 				->get();
-			if ($lastShift[0]->clock_out_time == null) {
-				$currentShiftMinutes = Carbon::now()->diffForHumans(Carbon::create($startDate));
-				dd($currentShiftMinutes);
+			// If the clock out time is null, then fetch the current time, and get the difference in minutes between the current time and the clock in time.
+			if (!empty(array_filter((array)$currentShift))) {
+				$currentShiftMinutes = Carbon::now()->diffInMinutes(Carbon::parse($currentShift[0]->clock_in_time));
+				$totals[$employee->name] += $currentShiftMinutes;
 			}
-			$totals[$employee->name] = $total;
 		}
 		return $totals;
 	}

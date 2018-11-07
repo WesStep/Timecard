@@ -162,10 +162,10 @@
                                         @if(($shift->user_id == $employee->id) && ($shift->company_id == $company->id))
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <p>{{ $shift->clock_in_time }}</p>
+                                                    <p>{{ $shift->clock_in_time_string }}</p>
                                                 </div>
                                                 <div class="col-md">
-                                                    <p>{{ $shift->clock_out_time }}</p>
+                                                    <p>{{ $shift->clock_out_time_string }}</p>
                                                 </div>
                                                 <div class="col-md">
                                                     <p>{{ floor(round($shift->duration_in_minutes / 60, 2)) }} hours, {{ $shift->duration_in_minutes % 60 }} minutes</p>
