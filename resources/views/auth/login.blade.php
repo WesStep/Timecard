@@ -3,6 +3,7 @@
 @section('jumbotron')
     <div class="jumbotron">
         <h1 class="display-3 text-center">Login</h1>
+        <p class="text-center lead">Welcome! If you're checking out this website for the first time, allow me to explain how it works <a href="{{route('explain')}}">Here</a>.</p>
     </div>
 @endsection
 

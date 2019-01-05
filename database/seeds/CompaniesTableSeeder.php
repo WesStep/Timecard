@@ -12,17 +12,17 @@ class CompaniesTableSeeder extends Seeder
 	 */
 	public function run() {
 		$company = new Company();
-		$company->name = 'Triumph Training';
+		$company->name = 'Wayne Enterprises';
 		$company->is_deleted = false;
 		$company->save();
 
 		$company = new Company();
-		$company->name = 'Home Investment Solutions';
+		$company->name = 'Stark Industries';
 		$company->is_deleted = false;
 		$company->save();
 
 		$company = new Company();
-		$company->name = 'MyStepDad.org';
+		$company->name = 'Acme Corporation';
 		$company->is_deleted = false;
 		$company->save();
 	}

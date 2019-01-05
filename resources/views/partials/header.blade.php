@@ -2,11 +2,11 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         @if(!Auth::check())
         <a class="navbar-brand" href="{{ route('index') }}">
-            <img src="{{ URL::to('/images/logoSm.png') }}" alt="Triumph Training">
+            <img src="{{ URL::to('/images/icon.png') }}" height="64" width="64" alt="Example Logo">
         </a>
         @else
         <a class="navbar-brand" href="{{ route('dashboard/index') }}">
-            <img src="{{ URL::to('/images/logoSm.png') }}" alt="Triumph Training">
+            <img src="{{ URL::to('/images/icon.png') }}" height="64" width="64" alt="Example Logo">
         </a>
         @endif
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">

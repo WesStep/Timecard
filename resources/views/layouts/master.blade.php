@@ -13,7 +13,8 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300" rel="stylesheet">
         <link rel="stylesheet" href="{{ URL::to('/css/style.css') }}">
-        <link rel="icon" href="/images/icon.ico">
+        <link rel="icon" href="/images/icon.png">
+        <link rel="apple-touch-icon" href="/images/icon.png">
     </head>
     <body>
         @include('partials.header')

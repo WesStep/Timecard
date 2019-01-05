@@ -26,6 +26,16 @@ Route::get('disclaimer', [
     'as' => 'disclaimer'
 ]);
 
+Route::get('explain', [
+	'uses' => 'PageController@getExplain',
+	'as' => 'explain'
+]);
+
+Route::get('reset', [
+	'uses' => 'ResetController@resetData',
+	'as' => 'reset'
+]);
+
 Route::group(['prefix' => 'dashboard', 'middleware' => ['auth']], function() {
 
     Route::get('/', [

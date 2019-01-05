@@ -118,6 +118,10 @@ class PageController extends Controller
 		return view('dashboard.edit', ['role' => session('role'), 'user' => $user]);
 	}
 
+	public function getExplain() {
+		return view('main.explain', ['role' => session('role')]);
+	}
+
 	public function getHistory() {
 		// Get work history page [employee]
 		// Get the currently logged in user
