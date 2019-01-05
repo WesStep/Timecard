@@ -52,7 +52,7 @@
 				<div class="card card-default mb-4">
 					<div class="card-body">
 						<h3>Employee Account</h3>
-						<p>Timecard.wesstep.com is a project I made in college. The original version of this app was made for a client who uses this software for his companys' employees. There are three main dashboards to login to: one for <strong>employees</strong>, one for <strong>payroll admins</strong>, and one for the <strong>business owner(s)</strong>.</p>
+						<p>Employees have the ability to login to their accounts, change their personal information, clock in/out, and view previous shifts worked.</p>
 					</div>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 				<div class="card card-default mb-4">
 					<div class="card-body">
 						<h3>Payroll Admin Account</h3>
-						<p>Timecard.wesstep.com is a project I made in college. The original version of this app was made for a client who uses this software for his companys' employees. There are three main dashboards to login to: one for <strong>employees</strong>, one for <strong>payroll admins</strong>, and one for the <strong>business owner(s)</strong>.</p>
+						<p>Payroll admins have the ability to login to their accounts, change their personal information, view employees' shifts, mark employee time as paid, and make edits to employee shifts as needed.</p>
 					</div>
 				</div>
 			</div>
@@ -72,7 +72,7 @@
 				<div class="card card-default mb-4">
 					<div class="card-body">
 						<h3>Business Owner Account</h3>
-						<p>Timecard.wesstep.com is a project I made in college. The original version of this app was made for a client who uses this software for his companys' employees. There are three main dashboards to login to: one for <strong>employees</strong>, one for <strong>payroll admins</strong>, and one for the <strong>business owner(s)</strong>.</p>
+						<p>Business Owners have the ability to login to their accounts, change their personal information, view employees' shifts by date and organized by company. The Business Owner dashboard allows them to be create, update, or delete multiple companies.</p>
 					</div>
 				</div>
 			</div>
